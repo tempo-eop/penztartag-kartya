@@ -3,7 +3,7 @@
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-icons/communication-icons.html">
 <link rel="import" href="../iron-icons/hardware-icons.html">
-<link rel="import" href="../iron-icons/social-icons.html"> 
+<link rel="import" href="../iron-icons/social-icons.html">
 <link rel="import" href="../paper-styles/typography.html">
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-button/paper-button.html">
@@ -14,9 +14,9 @@
 
 <!--
 `penztartag-kartya`
-A simple component of the health fund members&#39; personal data to display web.
+A simple component of the health fund members personal data to display web.
 
-@demo demo/index.html 
+@demo demo/index.html
 -->
 
 <dom-module id="penztartag-kartya">
@@ -25,38 +25,38 @@ A simple component of the health fund members&#39; personal data to display web.
 			:host {
 				display: block;
 			}
-			
+
 			span {
 				@apply(--paper-font-body1);
 			}
-			
-			paper-card.penztartagkartya	{ 
-				@apply(--layout-horizontal); 
+
+			paper-card.penztartagkartya	{
+				@apply(--layout-horizontal);
 				margin-right:4px;
 				margin-bottom:4px;
 			}
-			
-			paper-card.adatkartya { 
-				@apply(--layout-vertical); 
+
+			paper-card.adatkartya {
+				@apply(--layout-vertical);
 				margin-right:4px;
 				margin-bottom:4px;
 			}
-			
+
 			.content-head {
 				@apply(--layout-flex);
 				float: left;
 			}
-			
-			.kartya-header { 
-				@apply(--paper-font-headline); 
+
+			.kartya-header {
+				@apply(--paper-font-headline);
 			}
-			
-			.kartya-subtitle { 
-				color: var(--paper-grey-600); 
-				margin: 10px 0; 
+
+			.kartya-subtitle {
+				color: var(--paper-grey-600);
+				margin: 10px 0;
 			}
 		</style>
-		
+
 		<paper-card elevation="2" class="penztartagkartya" style="background-color: {{hatterszin}};">
 			<div class="content-head">
 				<div class="card-content">
@@ -66,137 +66,136 @@ A simple component of the health fund members&#39; personal data to display web.
 				</div>
 				<div class="card-actions">
 					<paper-button on-click="toggleSzemelyesDialog">
-						<iron-icon icon="icons:account-circle"></iron-icon> SzemÈlyes adatok
+						<iron-icon icon="icons:account-circle"></iron-icon> Szem√©lyes adatok
 					</paper-button>
 					<paper-button on-click="toggleElerhetosegekDialog">
-						<iron-icon icon="icons:home"></iron-icon> ElÈrhetısÈgek
+						<iron-icon icon="icons:home"></iron-icon> El√©rhet≈ës√©gek
 					</paper-button>
 					<paper-button on-click="toggleOrvosiJavaslatokDialog">
 						<iron-icon icon="icons:add-circle"></iron-icon> Orvosi javaslatok
 					</paper-button>
 				</div>
 			</div>
-		</paper-card> 
-		
-		<!-- SzemÈlyes adatok -->        
+		</paper-card>
+
+		<!-- Szem√©lyes adatok -->
 		<paper-dialog on-iron-overlay-opened="patchOverlay" id="tagszemelyesadatok" modal="true">
-			<h3>{{penztartagnev}} szemÈlyes adatai</h3>
+			<h3>{{penztartagnev}} szem√©lyes adatai</h3>
 			<paper-dialog-scrollable>
-				<paper-input readonly label="NÈv:" value="{{penztartagnev}}"></paper-input>
-				<paper-input readonly label="Sz¸letÈsi hely:" value="{{szuletesihely}}" placeholder="Nincs megadva">
-					<iron-icon icon="social:location-city" prefix></iron-icon>  
+				<paper-input readonly label="N√©v:" value="{{penztartagnev}}"></paper-input>
+				<paper-input readonly label="Sz√ºlet√©si hely:" value="{{szuletesihely}}" placeholder="Nincs megadva">
+					<iron-icon icon="social:location-city" prefix></iron-icon>
 				</paper-input>
-				<paper-input readonly label="Sz¸letÈsi idı:" value="{{szuletesiido}}" placeholder="Nincs megadva">
-					<iron-icon icon="icons:perm-contact-calendar" prefix></iron-icon>  
+				<paper-input readonly label="Sz√ºlet√©si id≈ë:" value="{{szuletesiido}}" placeholder="Nincs megadva">
+					<iron-icon icon="icons:perm-contact-calendar" prefix></iron-icon>
 				</paper-input>
-				<paper-input readonly label="AdÛsz·m:" value="{{adoszam}}" placeholder="Nincs megadva"></paper-input>
+				<paper-input readonly label="Ad√≥sz√°m:" value="{{adoszam}}" placeholder="Nincs megadva"></paper-input>
 			</paper-dialog-scrollable>
 			<div class="buttons">
-				<paper-button dialog-dismiss>Bez·r</paper-button>
+				<paper-button dialog-dismiss>Bez√°r</paper-button>
 			</div>
 		</paper-dialog>
-		<!-- SzemÈlyes adatok vÈge -->
-		
-		<!-- ElÈrhetıslÈgi adatok -->        
+		<!-- Szem√©lyes adatok v√©ge -->
+
+		<!-- El√©rhet≈ës√©gi adatok -->
 		<paper-dialog on-iron-overlay-opened="patchOverlay" id="tagelerhetosegek" modal="true">
-			<h3>{{penztartagnev}} elÈrhetısÈgei</h3>
+			<h3>{{penztartagnev}} el√©rhet≈ës√©gei</h3>
 			<paper-dialog-scrollable>
 
 				<div class="container flex-vertical layout vertical">
 
-					<!-- LakcÌm rÈsz -->
+					<!-- Lakc√≠m r√©sz -->
 					<paper-card class="adatkartya">
 						<div class="card-content">
-							<p class="paper-font-body2">LakcÌm:</p>
+							<p class="paper-font-body2">Lakc√≠m:</p>
 							<table style="width: 100%;">
 								<tbody>
 									<tr>
-										<td><paper-input readonly label="Ir·nyÌtÛsz·m:" maxlength="6" size="6" value="{{cimirsz}}" placeholder="Nincs megadva"></paper-input></td>
-										<td><paper-input readonly label="V·ros:" value="{{cimtelepules}}" placeholder="Nincs megadva"></paper-input></td>
+										<td><paper-input readonly label="Ir√°ny√≠t√≥sz√°m:" maxlength="6" size="6" value="{{cimirsz}}" placeholder="Nincs megadva"></paper-input></td>
+										<td><paper-input readonly label="V√°ros:" value="{{cimtelepules}}" placeholder="Nincs megadva"></paper-input></td>
 									</tr>
 								</tbody>
 							</table>
-							<paper-input readonly label="CÌm:" value="{{cimutcahsz}}" placeholder="Nincs megadva"></paper-input>
+							<paper-input readonly label="C√≠m:" value="{{cimutcahsz}}" placeholder="Nincs megadva"></paper-input>
 						</div>
 					</paper-card>
-					
-					<!-- LevelezÈsi cÌm rÈsz rÈsz -->
+
+					<!-- Levelez√©si c√≠m r√©sz -->
 					<paper-card class="adatkartya">
 						<div class="card-content">
-							<p class="paper-font-body2">LevelezÈsi cÌm:</p>
+							<p class="paper-font-body2">Levelez√©si c√≠m:</p>
 							<table style="width: 100%;">
 								<tbody>
 									<tr>
-										<td><paper-input readonly label="Ir·nyÌtÛsz·m:" maxlength="6" size="6" value="{{levcimirsz}}" placeholder="Nincs megadva"></paper-input></td>
-										<td><paper-input readonly label="V·ros:" value="{{levcimtelepules}}" placeholder="Nincs megadva"></paper-input></td>
+										<td><paper-input readonly label="Ir√°ny√≠t√≥sz√°m:" maxlength="6" size="6" value="{{levcimirsz}}" placeholder="Nincs megadva"></paper-input></td>
+										<td><paper-input readonly label="V√°ros:" value="{{levcimtelepules}}" placeholder="Nincs megadva"></paper-input></td>
 									</tr>
 								</tbody>
 							</table>
-							<paper-input readonly label="CÌm:" value="{{levcimutcahsz}}" placeholder="Nincs megadva"></paper-input>  
+							<paper-input readonly label="C√≠m:" value="{{levcimutcahsz}}" placeholder="Nincs megadva"></paper-input>
 						</div>
 					</paper-card>
-					
-					<!-- Elektronikus elÈrhetısÈgek rÈsz -->
+
+					<!-- Elektronikus el√©rhet≈ës√©gek r√©sz -->
 					<paper-card class="adatkartya">
 						<div class="card-content">
-							<p class="paper-font-body2">Telefonos Ès e-mail elÈrhetısÈgek:</p>
+							<p class="paper-font-body2">Telefonos √©s e-mail el√©rhet≈ës√©gek:</p>
 							<table style="width: 100%;">
 								<tbody>
 									<tr>
 										<td>
-											<paper-input readonly label="Telefonsz·m:" value="{{telefonszam}}" placeholder="Nincs megadva">
-											<iron-icon icon="communication:phone" prefix></iron-icon>  
+											<paper-input readonly label="Telefonsz√°m:" value="{{telefonszam}}" placeholder="Nincs megadva">
+											<iron-icon icon="communication:phone" prefix></iron-icon>
 											</paper-input>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<paper-input readonly label="Mobiltelefonsz·m:" value="{{mobiltelefonszam}}" placeholder="Nincs megadva">
-											<iron-icon icon="hardware:phone-android" prefix></iron-icon>  
+											<paper-input readonly label="Mobiltelefonsz√°m:" value="{{mobiltelefonszam}}" placeholder="Nincs megadva">
+											<iron-icon icon="hardware:phone-android" prefix></iron-icon>
 											</paper-input>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<paper-input readonly label="E-mail cÌm:" value="{{emailcim}}" placeholder="Nincs megadva">
+											<paper-input readonly label="E-mail c√≠m:" value="{{emailcim}}" placeholder="Nincs megadva">
 											<iron-icon icon="mail" prefix></iron-icon>
 											</paper-input>
 										</td>
 									</tr>
 								</tbody>
-							</table>      	      
+							</table>
 						</div>
-					</paper-card>  
-	 
-				</div> <!-- <-- FLEX kontÈner endje -->
-				
+					</paper-card>
+
+				</div> <!-- FLEX kont√©ner endje -->
+
 			</paper-dialog-scrollable>
-			
+
 			<div class="buttons">
-				<paper-button dialog-dismiss>Bez·r</paper-button>
+				<paper-button dialog-dismiss>Bez√°r</paper-button>
 			</div>
-		
+
 		</paper-dialog>
-		<!-- ElÈrhetıslÈgi adatok vÈge -->
-		
-		<!-- Orvosi javaslat adatok -->        
+		<!-- El√©rhet≈ësl√©gi adatok v√©ge -->
+
+		<!-- Orvosi javaslat adatok -->
 		<paper-dialog on-iron-overlay-opened="patchOverlay" id="tagorvosijavaslatok" modal="true">
 			<h3>{{penztartagnev}} Orvosi javaslatai</h3>
 			<paper-dialog-scrollable>
 				<div>
-					<paper-textarea rows="3" readonly label="Orvosi javaslatok:" placeholder="A szemÈlyhez nem tartunk nyilv·n orvosi javaslatot" value="{{orvosijavaslatok}}"></paper-textarea>
+					<paper-textarea rows="3" readonly label="Orvosi javaslatok:" placeholder="A szem√©lyhez nem tartunk nyilv√°n orvosi javaslatot" value="{{orvosijavaslatok}}"></paper-textarea>
 				</div>
 			</paper-dialog-scrollable>
 			<div class="buttons">
-				<paper-button dialog-dismiss>Bez·r</paper-button>
+				<paper-button dialog-dismiss>Bez√°r</paper-button>
 			</div>
 		</paper-dialog>
-		<!-- Orvosi javaslat adatok vÈge -->
+		<!-- Orvosi javaslat adatok v√©ge -->
 	</template>
 
 	<script>
-    Polymer(
-	{
+	Polymer({
 		is: 'penztartag-kartya',
 
 		properties: {
@@ -204,7 +203,7 @@ A simple component of the health fund members&#39; personal data to display web.
 				type: String,
 				notify: true,
 				reflectToAttribute: true
-			},		
+			},
 			penztartagnev: {
 				type: String,
 				notify: true,
@@ -230,7 +229,7 @@ A simple component of the health fund members&#39; personal data to display web.
 				notify: true,
 				value: 'block',
 				reflectToAttribute: true
-			},      
+			},
 			adoszam: {
 				type: String,
 				notify: true,
@@ -290,53 +289,44 @@ A simple component of the health fund members&#39; personal data to display web.
 				type: String,
 				notify: true,
 				reflectToAttribute: true
-			}	  
+			}
 		},
 
 		listeners: {
 			'epkartyaszam-changed': '_epkartyaszamChanged'
 		},
 
-		_epkartyaszamChanged: function()
-		{
-			if (this.epkartyaszam.length > 10)
-			{
+		_epkartyaszamChanged: function() {
+			if (this.epkartyaszam.length > 10) {
 				this.kartyavisibility = 'block';
 			}
-			else
-			{
+			else {
 				this.kartyavisibility = 'none';
 			}
 		},
 
-		toggleSzemelyesDialog: function() 
-		{
+		toggleSzemelyesDialog: function() {
 			this.$.tagszemelyesadatok.toggle();
 		},
 
-		toggleElerhetosegekDialog: function() 
-		{
+		toggleElerhetosegekDialog: function() {
 			this.$.tagelerhetosegek.toggle();
 		},
 
-		toggleOrvosiJavaslatokDialog: function() 
-		{
+		toggleOrvosiJavaslatokDialog: function() {
 			this.$.tagorvosijavaslatok.toggle();
 		},
 
-		patchOverlay: function (e) 
-		{
-			if (e.target.withBackdrop) 
-			{
+		patchOverlay: function (e) {
+			if (e.target.withBackdrop) {
 				e.target.parentNode.insertBefore(e.target.backdropElement, e.target);
 			}
-		},		
+		},
 
-		ready: function() 
-		{
+		ready: function() {
 			this._epkartyaszamChanged();
 		}
 
-    });
+  });
 	</script>
 </dom-module>
