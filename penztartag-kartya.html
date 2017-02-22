@@ -1,0 +1,342 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icons/communication-icons.html">
+<link rel="import" href="../iron-icons/hardware-icons.html">
+<link rel="import" href="../iron-icons/social-icons.html"> 
+<link rel="import" href="../paper-styles/typography.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-dialog-scrollable/paper-dialog-scrollable.html">
+
+<!--
+`penztartag-kartya`
+A simple component of the health fund members&#39; personal data to display web.
+
+@demo demo/index.html 
+-->
+
+<dom-module id="penztartag-kartya">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+			
+			span {
+				@apply(--paper-font-body1);
+			}
+			
+			paper-card.penztartagkartya	{ 
+				@apply(--layout-horizontal); 
+				margin-right:4px;
+				margin-bottom:4px;
+			}
+			
+			paper-card.adatkartya { 
+				@apply(--layout-vertical); 
+				margin-right:4px;
+				margin-bottom:4px;
+			}
+			
+			.content-head {
+				@apply(--layout-flex);
+				float: left;
+			}
+			
+			.kartya-header { 
+				@apply(--paper-font-headline); 
+			}
+			
+			.kartya-subtitle { 
+				color: var(--paper-grey-600); 
+				margin: 10px 0; 
+			}
+		</style>
+		
+		<paper-card elevation="2" class="penztartagkartya" style="background-color: {{hatterszin}};">
+			<div class="content-head">
+				<div class="card-content">
+					<div class="kartya-header">{{penztartagnev}}</div>
+					<div class="kartya-subtitle">{{tagtipus}}</div>
+					<div class="kartya-subtitle creditcard" style="display: {{kartyavisibility}};"><iron-icon icon="icons:credit-card"></iron-icon>{{epkartyaszam}}</div>
+				</div>
+				<div class="card-actions">
+					<paper-button on-click="toggleSzemelyesDialog">
+						<iron-icon icon="icons:account-circle"></iron-icon> Személyes adatok
+					</paper-button>
+					<paper-button on-click="toggleElerhetosegekDialog">
+						<iron-icon icon="icons:home"></iron-icon> Elérhetõségek
+					</paper-button>
+					<paper-button on-click="toggleOrvosiJavaslatokDialog">
+						<iron-icon icon="icons:add-circle"></iron-icon> Orvosi javaslatok
+					</paper-button>
+				</div>
+			</div>
+		</paper-card> 
+		
+		<!-- Személyes adatok -->        
+		<paper-dialog on-iron-overlay-opened="patchOverlay" id="tagszemelyesadatok" modal="true">
+			<h3>{{penztartagnev}} személyes adatai</h3>
+			<paper-dialog-scrollable>
+				<paper-input readonly label="Név:" value="{{penztartagnev}}"></paper-input>
+				<paper-input readonly label="Születési hely:" value="{{szuletesihely}}" placeholder="Nincs megadva">
+					<iron-icon icon="social:location-city" prefix></iron-icon>  
+				</paper-input>
+				<paper-input readonly label="Születési idõ:" value="{{szuletesiido}}" placeholder="Nincs megadva">
+					<iron-icon icon="icons:perm-contact-calendar" prefix></iron-icon>  
+				</paper-input>
+				<paper-input readonly label="Adószám:" value="{{adoszam}}" placeholder="Nincs megadva"></paper-input>
+			</paper-dialog-scrollable>
+			<div class="buttons">
+				<paper-button dialog-dismiss>Bezár</paper-button>
+			</div>
+		</paper-dialog>
+		<!-- Személyes adatok vége -->
+		
+		<!-- Elérhetõslégi adatok -->        
+		<paper-dialog on-iron-overlay-opened="patchOverlay" id="tagelerhetosegek" modal="true">
+			<h3>{{penztartagnev}} elérhetõségei</h3>
+			<paper-dialog-scrollable>
+
+				<div class="container flex-vertical layout vertical">
+
+					<!-- Lakcím rész -->
+					<paper-card class="adatkartya">
+						<div class="card-content">
+							<p class="paper-font-body2">Lakcím:</p>
+							<table style="width: 100%;">
+								<tbody>
+									<tr>
+										<td><paper-input readonly label="Irányítószám:" maxlength="6" size="6" value="{{cimirsz}}" placeholder="Nincs megadva"></paper-input></td>
+										<td><paper-input readonly label="Város:" value="{{cimtelepules}}" placeholder="Nincs megadva"></paper-input></td>
+									</tr>
+								</tbody>
+							</table>
+							<paper-input readonly label="Cím:" value="{{cimutcahsz}}" placeholder="Nincs megadva"></paper-input>
+						</div>
+					</paper-card>
+					
+					<!-- Levelezési cím rész rész -->
+					<paper-card class="adatkartya">
+						<div class="card-content">
+							<p class="paper-font-body2">Levelezési cím:</p>
+							<table style="width: 100%;">
+								<tbody>
+									<tr>
+										<td><paper-input readonly label="Irányítószám:" maxlength="6" size="6" value="{{levcimirsz}}" placeholder="Nincs megadva"></paper-input></td>
+										<td><paper-input readonly label="Város:" value="{{levcimtelepules}}" placeholder="Nincs megadva"></paper-input></td>
+									</tr>
+								</tbody>
+							</table>
+							<paper-input readonly label="Cím:" value="{{levcimutcahsz}}" placeholder="Nincs megadva"></paper-input>  
+						</div>
+					</paper-card>
+					
+					<!-- Elektronikus elérhetõségek rész -->
+					<paper-card class="adatkartya">
+						<div class="card-content">
+							<p class="paper-font-body2">Telefonos és e-mail elérhetõségek:</p>
+							<table style="width: 100%;">
+								<tbody>
+									<tr>
+										<td>
+											<paper-input readonly label="Telefonszám:" value="{{telefonszam}}" placeholder="Nincs megadva">
+											<iron-icon icon="communication:phone" prefix></iron-icon>  
+											</paper-input>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<paper-input readonly label="Mobiltelefonszám:" value="{{mobiltelefonszam}}" placeholder="Nincs megadva">
+											<iron-icon icon="hardware:phone-android" prefix></iron-icon>  
+											</paper-input>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<paper-input readonly label="E-mail cím:" value="{{emailcim}}" placeholder="Nincs megadva">
+											<iron-icon icon="mail" prefix></iron-icon>
+											</paper-input>
+										</td>
+									</tr>
+								</tbody>
+							</table>      	      
+						</div>
+					</paper-card>  
+	 
+				</div> <!-- <-- FLEX konténer endje -->
+				
+			</paper-dialog-scrollable>
+			
+			<div class="buttons">
+				<paper-button dialog-dismiss>Bezár</paper-button>
+			</div>
+		
+		</paper-dialog>
+		<!-- Elérhetõslégi adatok vége -->
+		
+		<!-- Orvosi javaslat adatok -->        
+		<paper-dialog on-iron-overlay-opened="patchOverlay" id="tagorvosijavaslatok" modal="true">
+			<h3>{{penztartagnev}} Orvosi javaslatai</h3>
+			<paper-dialog-scrollable>
+				<div>
+					<paper-textarea rows="3" readonly label="Orvosi javaslatok:" placeholder="A személyhez nem tartunk nyilván orvosi javaslatot" value="{{orvosijavaslatok}}"></paper-textarea>
+				</div>
+			</paper-dialog-scrollable>
+			<div class="buttons">
+				<paper-button dialog-dismiss>Bezár</paper-button>
+			</div>
+		</paper-dialog>
+		<!-- Orvosi javaslat adatok vége -->
+	</template>
+
+	<script>
+    Polymer(
+	{
+		is: 'penztartag-kartya',
+
+		properties: {
+			tagazonosito: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},		
+			penztartagnev: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			orvosijavaslatok: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			tagtipus: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			epkartyaszam: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			kartyavisibility: {
+				type: String,
+				notify: true,
+				value: 'block',
+				reflectToAttribute: true
+			},      
+			adoszam: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			szuletesiido: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			szuletesihely: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			cimirsz: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			cimtelepules: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			cimutcahsz: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			levcimirsz: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			levcimtelepules: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			levcimutcahsz: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			emailcim: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			telefonszam: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			},
+			mobiltelefonszam: {
+				type: String,
+				notify: true,
+				reflectToAttribute: true
+			}	  
+		},
+
+		listeners: {
+			'epkartyaszam-changed': '_epkartyaszamChanged'
+		},
+
+		_epkartyaszamChanged: function()
+		{
+			if (this.epkartyaszam.length > 10)
+			{
+				this.kartyavisibility = 'block';
+			}
+			else
+			{
+				this.kartyavisibility = 'none';
+			}
+		},
+
+		toggleSzemelyesDialog: function() 
+		{
+			this.$.tagszemelyesadatok.toggle();
+		},
+
+		toggleElerhetosegekDialog: function() 
+		{
+			this.$.tagelerhetosegek.toggle();
+		},
+
+		toggleOrvosiJavaslatokDialog: function() 
+		{
+			this.$.tagorvosijavaslatok.toggle();
+		},
+
+		patchOverlay: function (e) 
+		{
+			if (e.target.withBackdrop) 
+			{
+				e.target.parentNode.insertBefore(e.target.backdropElement, e.target);
+			}
+		},		
+
+		ready: function() 
+		{
+			this._epkartyaszamChanged();
+		}
+
+    });
+	</script>
+</dom-module>
