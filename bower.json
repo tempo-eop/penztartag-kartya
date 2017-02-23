@@ -3,14 +3,14 @@
   "description": "A simple component of the health fund members personal data to display web.",
   "main": "penztartag-kartya.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0",
-    "iron-icons": "PolymerElements/iron-icons#^1.2.0",
-    "paper-styles": "PolymerElements/paper-styles#^1.1.5",
-    "paper-card": "PolymerElements/paper-card#^1.1.4",
-    "paper-button": "PolymerElements/paper-button#^1.0.14",
-    "paper-input": "PolymerElements/paper-input#^1.1.23",
-    "paper-dialog": "PolymerElements/paper-dialog#^1.1.0",
-    "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#^1.1.5"
+    "polymer": "Polymer/polymer#^1.6.0",
+    "iron-icons": "PolymerElements/iron-icons",
+    "paper-styles": "PolymerElements/paper-styles",
+    "paper-card": "PolymerElements/paper-card",
+    "paper-button": "PolymerElements/paper-button",
+    "paper-input": "PolymerElements/paper-input",
+    "paper-dialog": "PolymerElements/paper-dialog",
+    "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
